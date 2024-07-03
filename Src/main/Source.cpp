@@ -32,23 +32,6 @@ const GLuint WIDTH = 800, HEIGHT = 600;
 // Variaveis globais
 Sprite spr;
 
-//static void drawBackgroundTexture(Sprite mainBackground, Sprite biggerCloud, Sprite blueClouds, Sprite smallerClouds)
-//{
-//	mainBackground.desenhar();
-//
-//	spr.desenhar();
-//
-//	biggerCloud.desenhar();
-//
-//	spr.desenhar();
-//
-//	blueClouds.desenhar();
-//
-//	spr.desenhar();
-//
-//	smallerClouds.desenhar();
-//}
-
 // Fun��o MAIN
 int main()
 {
@@ -73,7 +56,7 @@ int main()
 	// #endif
 	
 	// Cria��o da janela GLFW
-	GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "Ola Triangulo! -- Rossana", nullptr, nullptr);
+	GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "Ocean view", nullptr, nullptr);
 	glfwMakeContextCurrent(window);
 
 	// GLAD: carrega todos os ponteiros d fun��es da OpenGL
@@ -100,18 +83,17 @@ int main()
 	// Shader shader("../shaders/helloTriangle.vs", "../shaders/helloTriangle.fs");
 	Shader shader("C:\\Users\\eduar\\source\\repos\\PG2024-1\\HelloTriangle - Sprites\\shaders\\tex.vs", "C:\\Users\\eduar\\source\\repos\\PG2024-1\\HelloTriangle - Sprites\\shaders\\tex.fs");
 
-	//GLuint texID = loadTexture("C:\\Users\\eduar\\source\\repos\\PG2024-1\\Textures\\pixelWall.png");
-	//GLuint texID2 = loadTexture("C:\\Users\\eduar\\source\\repos\\PG2024-1\\Textures\\characters\\PNG\\Knight\\knight.png");
 	GLuint texID1 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\ocean-backgrounds\\Ocean_4\\1.png");
 	GLuint texID2 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\ocean-backgrounds\\Ocean_4\\2.png");
 	GLuint texID3 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\ocean-backgrounds\\Ocean_4\\3.png");
 	GLuint texID4 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\ocean-backgrounds\\Ocean_4\\4.png");
-	//GLuint texID4 = loadTexture("C:\\Users\\eduar\\source\\repos\\PG2024-1\\Textures\\craftpix-net-159039-free-pirate-stuff-pixel-art-icons\\PNG\\Transperent\\Icon41.png");
 
 	// Cria��o de uma sprite
 	spr.setShader(&shader);
 	//spr.inicializar(texID2, glm::vec3(400.0, 150.0, 0.0), glm::vec3(128, 128, 1.0));
 
+
+	// Background
 	Sprite mainBackground;
 	mainBackground.setShader(&shader);
 	mainBackground.inicializar(texID1, glm::vec3(400.0, 300.0, 0.0), glm::vec3(1920.0 / 2.0, 1080.0 / 2.0, 1.0));
@@ -128,10 +110,66 @@ int main()
 	smallerClouds.setShader(&shader);
 	smallerClouds.inicializar(texID4, glm::vec3(400.0, 300.0, 0.0), glm::vec3(1920.0 / 2.0, 1080.0 / 2.0, 1.0));
 
+	GLuint texID5 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\nature-objects\\PNG\\Bushes3\\Bush3_3.png");
+	GLuint texID6 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\rocks-objects\\PNG\\Objects_separately\\Rock5_1.png");
 
-	//Sprite bomba;
-	//bomba.setShader(&shader);
-	//bomba.inicializar(texID4, glm::vec3(400.0, 900.0, 0.0), glm::vec3(32.0, 32.0, 1.0));
+	//seabed
+	GLuint texID7 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\PNG\\Objects_separately\\Ship2_shadow1.png");
+	GLuint texID8 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\PNG\\Objects_separately\\Anchor_shadow1.png");
+	GLuint texID9 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\PNG\\Objects_separately\\Sea_urchin2_shadow1.png");
+	GLuint texID10 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\PNG\\Objects_separately\\Starfish2_shadow1.png");
+	GLuint texID11 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\PNG\\Objects_separately\\Beige-violet_coral2_shadow2.png");
+	GLuint texID12 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\PNG\\Objects_separately\\Monster_fish_bones_shadow1.png");
+	GLuint texID13 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\rocks-objects\\PNG\\Objects_separately\\Rock5_3.png");
+	GLuint texID14 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\PNG\\Objects_separately\\Crab_shadow1.png");
+	GLuint texID15 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\PNG\\Objects_separately\\Brown-white_shell1_shadow1.png");
+
+
+	// Plants
+	Sprite bush;
+	bush.setShader(&shader);
+	bush.inicializar(texID5, glm::vec3(740.0, 64.0, 0.0), glm::vec3(960.0 / 10.0, 540.0 / 8.0, 1.0));
+
+	Sprite rock;
+	rock.setShader(&shader);
+	rock.inicializar(texID6, glm::vec3(440.0, 60.0, 0.0), glm::vec3(54.0 / 1.0, 54.0 / 1.0, 1.0));
+
+	// sea elements
+	Sprite ship;
+	ship.setShader(&shader);
+	ship.inicializar(texID7, glm::vec3(120, 60.0, 0.0), glm::vec3(1920.0 / 8.0, 1080.0 / 8.0, 1.0));
+
+	Sprite anchor;
+	anchor.setShader(&shader);
+	anchor.inicializar(texID8, glm::vec3(425, 60.0, 0.0), glm::vec3(54.0 / 1.0, 54.0 / 1.0, 1.0));
+
+	Sprite seaUrchin;
+	seaUrchin.setShader(&shader);
+	seaUrchin.inicializar(texID9, glm::vec3(440, 40.0, 0.0), glm::vec3(54.0 / 2.0, 54.0 / 2.0, 1.0));
+
+	Sprite starFish;
+	starFish.setShader(&shader);
+	starFish.inicializar(texID10, glm::vec3(560, 40.0, 0.0), glm::vec3(54.0 / 2.0, 54.0 / 2.0, 1.0));
+
+	Sprite coral;
+	coral.setShader(&shader);
+	coral.inicializar(texID11, glm::vec3(300.0, 60.0, 0.0), glm::vec3(1920.0 / 40.0, 1080.0 / 24.0, 1.0));
+
+	Sprite monsterFish;
+	monsterFish.setShader(&shader);
+	monsterFish.inicializar(texID12, glm::vec3(200.0, 42.0, 0.0), glm::vec3(1920.0 / 40.0, 1080.0 / 24.0, 1.0));
+
+	Sprite smallRock;
+	smallRock.setShader(&shader);
+	smallRock.inicializar(texID13, glm::vec3(116.0, 48.0, 0.0), glm::vec3(480.0 / 20.0, 270.0 / 10.0, 1.0));
+
+	Sprite crab;
+	crab.setShader(&shader);
+	crab.inicializar(texID14, glm::vec3(640.0, 48.0, 0.0), glm::vec3(1920.0 / 40.0, 1080.0 / 24.0, 1.0));
+
+	Sprite shell;
+	shell.setShader(&shader);
+	shell.inicializar(texID15, glm::vec3(380.0, 42.0, 0.0), glm::vec3(1920.0 / 40.0, 1080.0 / 24.0, 1.0));
 
 	// Ativando o buffer de textura 0 da opengl
 	glActiveTexture(GL_TEXTURE0);
@@ -165,17 +203,29 @@ int main()
 
 		mainBackground.desenhar();
 
-		spr.desenhar();
+		//spr.desenhar();
 
 		biggerCloud.desenhar();
 
-		spr.desenhar();
+		//spr.desenhar();
 
 		blueClouds.desenhar();
 
-		spr.desenhar();
+		//spr.desenhar();
 
 		smallerClouds.desenhar();
+
+		bush.desenhar();
+		rock.desenhar();
+		ship.desenhar();
+		anchor.desenhar();
+		seaUrchin.desenhar();
+		starFish.desenhar();
+		coral.desenhar();
+		monsterFish.desenhar();
+		smallRock.desenhar();
+		crab.desenhar();
+		shell.desenhar();
 
 		// Troca os buffers da tela
 		glfwSwapBuffers(window);

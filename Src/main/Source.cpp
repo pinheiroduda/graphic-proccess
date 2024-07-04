@@ -42,7 +42,6 @@ struct SpriteInfo {
 };
 
 static void startSprite(Sprite& sprite, Shader& shader, SpriteInfo& info) {
-	std::cout << "Logging value" << std::endl;
 	sprite.setShader(&shader);
 	sprite.inicializar(info.textureID, info.position, info.size);
 }

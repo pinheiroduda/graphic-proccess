@@ -23,6 +23,9 @@ using namespace std;
 // Classe para manipula��o das sprites
 #include "Sprite.h"
 
+#include <vector>
+#include <glm/glm.hpp>
+
 // Prot�tipos das fun��es
 GLuint loadTexture(string texturePath);
 
@@ -31,6 +34,19 @@ const GLuint WIDTH = 800, HEIGHT = 600;
 
 // Variaveis globais
 Sprite spr;
+
+struct SpriteInfo {
+	GLuint textureID;
+	glm::vec3 position;
+	glm::vec3 size;
+};
+
+static void startSprite(Sprite& sprite, Shader& shader, SpriteInfo& info) {
+	std::cout << "Logging value" << std::endl;
+	sprite.setShader(&shader);
+	sprite.inicializar(info.textureID, info.position, info.size);
+}
+
 
 // Fun��o MAIN
 int main()
@@ -81,39 +97,17 @@ int main()
 
 	// Compilando e buildando o programa de shader
 	// Shader shader("../shaders/helloTriangle.vs", "../shaders/helloTriangle.fs");
-	Shader shader("C:\\Users\\eduar\\source\\repos\\PG2024-1\\HelloTriangle - Sprites\\shaders\\tex.vs", "C:\\Users\\eduar\\source\\repos\\PG2024-1\\HelloTriangle - Sprites\\shaders\\tex.fs");
+	Shader shader("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Src\\shaders\\tex.vs", "C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Src\\shaders\\tex.fs");
 
+	// Ocean background
 	GLuint texID1 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\ocean-backgrounds\\Ocean_4\\1.png");
 	GLuint texID2 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\ocean-backgrounds\\Ocean_4\\2.png");
 	GLuint texID3 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\ocean-backgrounds\\Ocean_4\\3.png");
 	GLuint texID4 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\ocean-backgrounds\\Ocean_4\\4.png");
 
-	// Cria��o de uma sprite
-	spr.setShader(&shader);
-	//spr.inicializar(texID2, glm::vec3(400.0, 150.0, 0.0), glm::vec3(128, 128, 1.0));
-
-
-	// Background
-	Sprite mainBackground;
-	mainBackground.setShader(&shader);
-	mainBackground.inicializar(texID1, glm::vec3(400.0, 300.0, 0.0), glm::vec3(1920.0 / 2.0, 1080.0 / 2.0, 1.0));
-
-	Sprite biggerCloud;
-	biggerCloud.setShader(&shader);
-	biggerCloud.inicializar(texID2, glm::vec3(400.0, 300.0, 0.0), glm::vec3(1920.0 / 2.0, 1080.0 / 2.0, 1.0));
-
-	Sprite blueClouds;
-	blueClouds.setShader(&shader);
-	blueClouds.inicializar(texID3, glm::vec3(400.0, 300.0, 0.0), glm::vec3(1920.0 / 2.0, 1080.0 / 2.0, 1.0));
-
-	Sprite smallerClouds;
-	smallerClouds.setShader(&shader);
-	smallerClouds.inicializar(texID4, glm::vec3(400.0, 300.0, 0.0), glm::vec3(1920.0 / 2.0, 1080.0 / 2.0, 1.0));
-
+	// Nature elements
 	GLuint texID5 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\nature-objects\\PNG\\Bushes3\\Bush3_3.png");
 	GLuint texID6 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\rocks-objects\\PNG\\Objects_separately\\Rock5_1.png");
-
-	//seabed
 	GLuint texID7 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\PNG\\Objects_separately\\Ship2_shadow1.png");
 	GLuint texID8 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\PNG\\Objects_separately\\Anchor_shadow1.png");
 	GLuint texID9 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\PNG\\Objects_separately\\Sea_urchin2_shadow1.png");
@@ -124,52 +118,34 @@ int main()
 	GLuint texID14 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\PNG\\Objects_separately\\Crab_shadow1.png");
 	GLuint texID15 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\PNG\\Objects_separately\\Brown-white_shell1_shadow1.png");
 
+	// Cria��o de uma sprite
+	spr.setShader(&shader);
 
-	// Plants
-	Sprite bush;
-	bush.setShader(&shader);
-	bush.inicializar(texID5, glm::vec3(740.0, 64.0, 0.0), glm::vec3(960.0 / 10.0, 540.0 / 8.0, 1.0));
+	std::vector<SpriteInfo> spriteInfos = {
+		{ texID1, glm::vec3(400.0, 300.0, 0.0), glm::vec3(1920.0 / 2.0, 1080.0 / 2.0, 1.0) },
+		{ texID2, glm::vec3(400.0, 300.0, 0.0), glm::vec3(1920.0 / 2.0, 1080.0 / 2.0, 1.0) },
+		{ texID3, glm::vec3(400.0, 300.0, 0.0), glm::vec3(1920.0 / 2.0, 1080.0 / 2.0, 1.0) },
+		{ texID4, glm::vec3(400.0, 300.0, 0.0), glm::vec3(1920.0 / 2.0, 1080.0 / 2.0, 1.0) },
+		{ texID5, glm::vec3(740.0, 64.0, 0.0), glm::vec3(960.0 / 10.0, 540.0 / 8.0, 1.0) },
+		{ texID6, glm::vec3(440.0, 60.0, 0.0), glm::vec3(54.0 / 1.0, 54.0 / 1.0, 1.0) },
+		{ texID7, glm::vec3(120, 60.0, 0.0), glm::vec3(1920.0 / 8.0, 1080.0 / 8.0, 1.0) },
+		{ texID8, glm::vec3(425, 60.0, 0.0), glm::vec3(54.0 / 1.0, 54.0 / 1.0, 1.0) },
+		{ texID9, glm::vec3(440, 40.0, 0.0), glm::vec3(54.0 / 2.0, 54.0 / 2.0, 1.0) },
+		{ texID10, glm::vec3(560, 40.0, 0.0), glm::vec3(54.0 / 2.0, 54.0 / 2.0, 1.0) },
+		{ texID11, glm::vec3(300.0, 60.0, 0.0), glm::vec3(1920.0 / 40.0, 1080.0 / 24.0, 1.0) },
+		{ texID12, glm::vec3(200.0, 42.0, 0.0), glm::vec3(1920.0 / 40.0, 1080.0 / 24.0, 1.0) },
+		{ texID13, glm::vec3(116.0, 48.0, 0.0), glm::vec3(480.0 / 20.0, 270.0 / 10.0, 1.0) },
+		{ texID14, glm::vec3(640.0, 48.0, 0.0), glm::vec3(1920.0 / 40.0, 1080.0 / 24.0, 1.0) },
+		{ texID15, glm::vec3(380.0, 42.0, 0.0), glm::vec3(1920.0 / 40.0, 1080.0 / 24.0, 1.0) }
+	};
 
-	Sprite rock;
-	rock.setShader(&shader);
-	rock.inicializar(texID6, glm::vec3(440.0, 60.0, 0.0), glm::vec3(54.0 / 1.0, 54.0 / 1.0, 1.0));
+	// Vetor que armazena os sprites
+	std::vector<Sprite> sprites(spriteInfos.size());
 
-	// sea elements
-	Sprite ship;
-	ship.setShader(&shader);
-	ship.inicializar(texID7, glm::vec3(120, 60.0, 0.0), glm::vec3(1920.0 / 8.0, 1080.0 / 8.0, 1.0));
-
-	Sprite anchor;
-	anchor.setShader(&shader);
-	anchor.inicializar(texID8, glm::vec3(425, 60.0, 0.0), glm::vec3(54.0 / 1.0, 54.0 / 1.0, 1.0));
-
-	Sprite seaUrchin;
-	seaUrchin.setShader(&shader);
-	seaUrchin.inicializar(texID9, glm::vec3(440, 40.0, 0.0), glm::vec3(54.0 / 2.0, 54.0 / 2.0, 1.0));
-
-	Sprite starFish;
-	starFish.setShader(&shader);
-	starFish.inicializar(texID10, glm::vec3(560, 40.0, 0.0), glm::vec3(54.0 / 2.0, 54.0 / 2.0, 1.0));
-
-	Sprite coral;
-	coral.setShader(&shader);
-	coral.inicializar(texID11, glm::vec3(300.0, 60.0, 0.0), glm::vec3(1920.0 / 40.0, 1080.0 / 24.0, 1.0));
-
-	Sprite monsterFish;
-	monsterFish.setShader(&shader);
-	monsterFish.inicializar(texID12, glm::vec3(200.0, 42.0, 0.0), glm::vec3(1920.0 / 40.0, 1080.0 / 24.0, 1.0));
-
-	Sprite smallRock;
-	smallRock.setShader(&shader);
-	smallRock.inicializar(texID13, glm::vec3(116.0, 48.0, 0.0), glm::vec3(480.0 / 20.0, 270.0 / 10.0, 1.0));
-
-	Sprite crab;
-	crab.setShader(&shader);
-	crab.inicializar(texID14, glm::vec3(640.0, 48.0, 0.0), glm::vec3(1920.0 / 40.0, 1080.0 / 24.0, 1.0));
-
-	Sprite shell;
-	shell.setShader(&shader);
-	shell.inicializar(texID15, glm::vec3(380.0, 42.0, 0.0), glm::vec3(1920.0 / 40.0, 1080.0 / 24.0, 1.0));
+	// Inicializando os sprites
+	for (size_t i = 0; i < sprites.size(); ++i) {
+		startSprite(sprites[i], shader, spriteInfos[i]);
+	}
 
 	// Ativando o buffer de textura 0 da opengl
 	glActiveTexture(GL_TEXTURE0);
@@ -199,33 +175,9 @@ int main()
 		glClearColor(0.5f, 0.5f, 0.5f, 1.0f); // cor de fundo
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		//drawBackgroundTexture(mainBackground, biggerCloud, blueClouds, smallerClouds);
-
-		mainBackground.desenhar();
-
-		//spr.desenhar();
-
-		biggerCloud.desenhar();
-
-		//spr.desenhar();
-
-		blueClouds.desenhar();
-
-		//spr.desenhar();
-
-		smallerClouds.desenhar();
-
-		bush.desenhar();
-		rock.desenhar();
-		ship.desenhar();
-		anchor.desenhar();
-		seaUrchin.desenhar();
-		starFish.desenhar();
-		coral.desenhar();
-		monsterFish.desenhar();
-		smallRock.desenhar();
-		crab.desenhar();
-		shell.desenhar();
+		for (Sprite& sprite : sprites) {
+			sprite.desenhar();
+		}
 
 		// Troca os buffers da tela
 		glfwSwapBuffers(window);

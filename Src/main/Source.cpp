@@ -26,8 +26,14 @@ using namespace std;
 #include <vector>
 #include <glm/glm.hpp>
 
+struct TextureInfo {
+	GLuint texID;
+	int width;
+	int height;
+};
+
 // Prot�tipos das fun��es
-GLuint loadTexture(string texturePath);
+TextureInfo loadTexture(string texturePath);
 
 // Dimens�es da janela (pode ser alterado em tempo de execu��o)
 const GLuint WIDTH = 800, HEIGHT = 600;
@@ -99,43 +105,66 @@ int main()
 	Shader shader("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Src\\shaders\\tex.vs", "C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Src\\shaders\\tex.fs");
 
 	// Ocean background
-	GLuint texID1 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\ocean-backgrounds\\Ocean_4\\1.png");
-	GLuint texID2 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\ocean-backgrounds\\Ocean_4\\2.png");
-	GLuint texID3 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\ocean-backgrounds\\Ocean_4\\3.png");
-	GLuint texID4 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\ocean-backgrounds\\Ocean_4\\4.png");
+	TextureInfo texID1 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\ocean-backgrounds\\1.png");
+	TextureInfo texID2 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\ocean-backgrounds\\2.png");
+	TextureInfo texID3 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\ocean-backgrounds\\3.png");
+	TextureInfo texID4 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\ocean-backgrounds\\4.png");
 
 	// Nature elements
-	GLuint texID5 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\nature-objects\\PNG\\Bushes3\\Bush3_3.png");
-	GLuint texID6 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\rocks-objects\\PNG\\Objects_separately\\Rock5_1.png");
-	GLuint texID7 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\PNG\\Objects_separately\\Ship2_shadow1.png");
-	GLuint texID8 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\PNG\\Objects_separately\\Anchor_shadow1.png");
-	GLuint texID9 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\PNG\\Objects_separately\\Sea_urchin2_shadow1.png");
-	GLuint texID10 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\PNG\\Objects_separately\\Starfish2_shadow1.png");
-	GLuint texID11 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\PNG\\Objects_separately\\Beige-violet_coral2_shadow2.png");
-	GLuint texID12 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\PNG\\Objects_separately\\Monster_fish_bones_shadow1.png");
-	GLuint texID13 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\rocks-objects\\PNG\\Objects_separately\\Rock5_3.png");
-	GLuint texID14 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\PNG\\Objects_separately\\Crab_shadow1.png");
-	GLuint texID15 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\PNG\\Objects_separately\\Brown-white_shell1_shadow1.png");
+	TextureInfo texID5 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\nature-objects\\Bush3_3.png");
+	TextureInfo texID6 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\rocks-objects\\Rock5_1.png");
+	TextureInfo texID7 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\Ship2_shadow1.png");
+	TextureInfo texID8 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\Anchor_shadow1.png");
+	TextureInfo texID9 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\Sea_urchin2_shadow1.png");
+	TextureInfo texID10 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\Starfish2_shadow1.png");
+	TextureInfo texID11 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\Beige-violet_coral2_shadow2.png");
+	TextureInfo texID12 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\Monster_fish_bones_shadow1.png");
+	TextureInfo texID13 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\rocks-objects\\Rock5_3.png");
+	TextureInfo texID14 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\Crab_shadow1.png");
+	TextureInfo texID15 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\Brown-white_shell1_shadow1.png");
+
+	// Pirate stuff
+	TextureInfo texID16 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\pirate-textures\\closed_trunk.png");
 
 	// Cria��o de uma sprite
 	spr.setShader(&shader);
 
+	//std::vector<SpriteInfo> spriteInfos = {
+	//	{ texID1.texID, glm::vec3(400.0, 300.0, 0.0), glm::vec3(1920.0 / 2.0, 1080.0 / 2.0, 1.0) },
+	//	{ texID2.texID, glm::vec3(400.0, 300.0, 0.0), glm::vec3(1920.0 / 2.0, 1080.0 / 2.0, 1.0) },
+	//	{ texID3.texID, glm::vec3(400.0, 300.0, 0.0), glm::vec3(1920.0 / 2.0, 1080.0 / 2.0, 1.0) },
+	//	{ texID4.texID, glm::vec3(400.0, 300.0, 0.0), glm::vec3(1920.0 / 2.0, 1080.0 / 2.0, 1.0) },
+	//	{ texID5.texID, glm::vec3(740.0, 64.0, 0.0), glm::vec3(960.0 / 10.0, 540.0 / 8.0, 1.0) },
+	//	{ texID6.texID, glm::vec3(440.0, 60.0, 0.0), glm::vec3(54.0 / 1.0, 54.0 / 1.0, 1.0) },
+	//	{ texID7.texID, glm::vec3(120, 60.0, 0.0), glm::vec3(1920.0 / 8.0, 1080.0 / 8.0, 1.0) },
+	//	{ texID8.texID, glm::vec3(425, 60.0, 0.0), glm::vec3(54.0 / 1.0, 54.0 / 1.0, 1.0) },
+	//	{ texID9.texID, glm::vec3(440, 40.0, 0.0), glm::vec3(54.0 / 2.0, 54.0 / 2.0, 1.0) },
+	//	{ texID10.texID, glm::vec3(560, 40.0, 0.0), glm::vec3(54.0 / 2.0, 54.0 / 2.0, 1.0) },
+	//	{ texID11.texID, glm::vec3(520.0, 65.0, 0.0), glm::vec3(1920.0 / 40.0, 1080.0 / 24.0, 1.0) },
+	//	{ texID12.texID, glm::vec3(200.0, 42.0, 0.0), glm::vec3(1920.0 / 40.0, 1080.0 / 24.0, 1.0) },
+	//	{ texID13.texID, glm::vec3(116.0, 48.0, 0.0), glm::vec3(480.0 / 20.0, 270.0 / 10.0, 1.0) },
+	//	{ texID14.texID, glm::vec3(640.0, 48.0, 0.0), glm::vec3(1920.0 / 40.0, 1080.0 / 24.0, 1.0) },
+	//	{ texID15.texID, glm::vec3(380.0, 42.0, 0.0), glm::vec3(1920.0 / 40.0, 1080.0 / 24.0, 1.0) },
+	//	{ texID16.texID, glm::vec3(250.0, 70.0, 0.0), glm::vec3(1920.0 / 40.0, 1080.0 / 24.0, 1.0) }
+	//};
+
 	std::vector<SpriteInfo> spriteInfos = {
-		{ texID1, glm::vec3(400.0, 300.0, 0.0), glm::vec3(1920.0 / 2.0, 1080.0 / 2.0, 1.0) },
-		{ texID2, glm::vec3(400.0, 300.0, 0.0), glm::vec3(1920.0 / 2.0, 1080.0 / 2.0, 1.0) },
-		{ texID3, glm::vec3(400.0, 300.0, 0.0), glm::vec3(1920.0 / 2.0, 1080.0 / 2.0, 1.0) },
-		{ texID4, glm::vec3(400.0, 300.0, 0.0), glm::vec3(1920.0 / 2.0, 1080.0 / 2.0, 1.0) },
-		{ texID5, glm::vec3(740.0, 64.0, 0.0), glm::vec3(960.0 / 10.0, 540.0 / 8.0, 1.0) },
-		{ texID6, glm::vec3(440.0, 60.0, 0.0), glm::vec3(54.0 / 1.0, 54.0 / 1.0, 1.0) },
-		{ texID7, glm::vec3(120, 60.0, 0.0), glm::vec3(1920.0 / 8.0, 1080.0 / 8.0, 1.0) },
-		{ texID8, glm::vec3(425, 60.0, 0.0), glm::vec3(54.0 / 1.0, 54.0 / 1.0, 1.0) },
-		{ texID9, glm::vec3(440, 40.0, 0.0), glm::vec3(54.0 / 2.0, 54.0 / 2.0, 1.0) },
-		{ texID10, glm::vec3(560, 40.0, 0.0), glm::vec3(54.0 / 2.0, 54.0 / 2.0, 1.0) },
-		{ texID11, glm::vec3(300.0, 60.0, 0.0), glm::vec3(1920.0 / 40.0, 1080.0 / 24.0, 1.0) },
-		{ texID12, glm::vec3(200.0, 42.0, 0.0), glm::vec3(1920.0 / 40.0, 1080.0 / 24.0, 1.0) },
-		{ texID13, glm::vec3(116.0, 48.0, 0.0), glm::vec3(480.0 / 20.0, 270.0 / 10.0, 1.0) },
-		{ texID14, glm::vec3(640.0, 48.0, 0.0), glm::vec3(1920.0 / 40.0, 1080.0 / 24.0, 1.0) },
-		{ texID15, glm::vec3(380.0, 42.0, 0.0), glm::vec3(1920.0 / 40.0, 1080.0 / 24.0, 1.0) }
+		{ texID1.texID, glm::vec3(400.0, 300.0, 0.0), glm::vec3(texID1.width * 1.4, texID1.height * 1.65, 1.0) },
+		{ texID2.texID, glm::vec3(400.0, 300.0, 0.0), glm::vec3(texID2.width * 1.4, texID2.height * 1.4, 1.0) },
+		{ texID3.texID, glm::vec3(400.0, 300.0, 0.0), glm::vec3(texID3.width * 1.4, texID3.height * 1.4, 1.0) },
+		{ texID4.texID, glm::vec3(400.0, 300.0, 0.0), glm::vec3(texID4.width * 1.4, texID4.height * 1.4, 1.0) },
+		{ texID5.texID, glm::vec3(700.0, 60.0, 0.0), glm::vec3(texID5.width, texID5.height, 1.0) },
+		{ texID6.texID, glm::vec3(440.0, 64.0, 0.0), glm::vec3(texID6.width / 1.25, texID6.height / 1.25, 1.0) },
+		{ texID7.texID, glm::vec3(40, 76.0, 0.0), glm::vec3(texID7.width, texID7.height, 1.0) },
+		{ texID8.texID, glm::vec3(425, 60.0, 0.0), glm::vec3(texID8.width / 1.25, texID8.height / 1.25, 1.0) },
+		{ texID9.texID, glm::vec3(440, 42.0, 0.0), glm::vec3(texID9.width / 2.4, texID9.height / 2.4, 1.0) },
+		{ texID10.texID, glm::vec3(560, 52.0, 0.0), glm::vec3(texID10.width / 1.5, texID10.height / 1.5, 1.0) },
+		{ texID11.texID, glm::vec3(780.0, 65.0, 0.0), glm::vec3(texID11.width / 1.5, texID11.height / 1.5, 1.0) },
+		{ texID12.texID, glm::vec3(160.0, 48.0, 0.0), glm::vec3(texID12.width / 2.5, texID12.height / 2.5, 1.0) },
+		{ texID13.texID, glm::vec3(104.0, 48.0, 0.0), glm::vec3(texID13.width / 1.5, texID13.height / 1.5, 1.0) },
+		{ texID14.texID, glm::vec3(620.0, 44.0, 0.0), glm::vec3(texID14.width / 5.0, texID14.height / 5.0, 1.0) },
+		{ texID15.texID, glm::vec3(380.0, 42.0, 0.0), glm::vec3(texID15.width / 2.2, texID15.height / 2.2, 1.0) },
+		{ texID16.texID, glm::vec3(250.0, 70.0, 0.0), glm::vec3(texID16.width / 5.0, texID16.height / 5.0, 1.0) }
 	};
 
 	// Vetor que armazena os sprites
@@ -187,13 +216,15 @@ int main()
 	return 0;
 }
 
-GLuint loadTexture(string texturePath)
+// todo - atualizar largura e altura pra pegar por prop
+
+TextureInfo loadTexture(string texturePath)
 {
-	GLuint texID;
+	TextureInfo texInfo;
 
 	// Gera o identificador da textura na mem�ria
-	glGenTextures(1, &texID);
-	glBindTexture(GL_TEXTURE_2D, texID);
+	glGenTextures(1, &texInfo.texID);
+	glBindTexture(GL_TEXTURE_2D, texInfo.texID);
 
 	// Configura��o do par�metro WRAPPING nas coords s e t
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -203,18 +234,18 @@ GLuint loadTexture(string texturePath)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	int width, height, nrChannels;
-	unsigned char *data = stbi_load(texturePath.c_str(), &width, &height, &nrChannels, 0);
+	int nrChannels;
+	unsigned char *data = stbi_load(texturePath.c_str(), &texInfo.width, &texInfo.height, &nrChannels, 0);
 
 	if (data)
 	{
 		if (nrChannels == 3) // jpg, bmp
 		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texInfo.width, texInfo.height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 		}
 		else // png
 		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texInfo.width, texInfo.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 		}
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
@@ -226,5 +257,5 @@ GLuint loadTexture(string texturePath)
 	stbi_image_free(data);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	return texID;
+	return texInfo;
 }

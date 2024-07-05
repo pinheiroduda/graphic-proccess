@@ -102,29 +102,29 @@ int main()
 
 	// Compilando e buildando o programa de shader
 	// Shader shader("../shaders/helloTriangle.vs", "../shaders/helloTriangle.fs");
-	Shader shader("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Src\\shaders\\tex.vs", "C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Src\\shaders\\tex.fs");
+	Shader shader("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess\\textures\\Src\\shaders\\tex.vs", "C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess\\textures\\Src\\shaders\\tex.fs");
 
 	// Ocean background
-	TextureInfo texID1 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\ocean-backgrounds\\1.png");
-	TextureInfo texID2 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\ocean-backgrounds\\2.png");
-	TextureInfo texID3 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\ocean-backgrounds\\3.png");
-	TextureInfo texID4 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\ocean-backgrounds\\4.png");
+	TextureInfo texID1 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess\\textures\\Assets\\ocean-backgrounds\\1.png");
+	TextureInfo texID2 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess\\textures\\Assets\\ocean-backgrounds\\2.png");
+	TextureInfo texID3 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess\\textures\\Assets\\ocean-backgrounds\\3.png");
+	TextureInfo texID4 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess\\textures\\Assets\\ocean-backgrounds\\4.png");
 
 	// Nature elements
-	TextureInfo texID5 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\nature-objects\\Bush3_3.png");
-	TextureInfo texID6 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\rocks-objects\\Rock5_1.png");
-	TextureInfo texID7 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\Ship2_shadow1.png");
-	TextureInfo texID8 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\Anchor_shadow1.png");
-	TextureInfo texID9 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\Sea_urchin2_shadow1.png");
-	TextureInfo texID10 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\Starfish2_shadow1.png");
-	TextureInfo texID11 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\Beige-violet_coral2_shadow2.png");
-	TextureInfo texID12 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\Monster_fish_bones_shadow1.png");
-	TextureInfo texID13 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\rocks-objects\\Rock5_3.png");
-	TextureInfo texID14 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\Crab_shadow1.png");
-	TextureInfo texID15 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\seabed-objects\\Brown-white_shell1_shadow1.png");
+	TextureInfo texID5 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess\\textures\\Assets\\nature-objects\\Bush3_3.png");
+	TextureInfo texID6 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess\\textures\\Assets\\rocks-objects\\Rock5_1.png");
+	TextureInfo texID7 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess\\textures\\Assets\\seabed-objects\\Ship2_shadow1.png");
+	TextureInfo texID8 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess\\textures\\Assets\\seabed-objects\\Anchor_shadow1.png");
+	TextureInfo texID9 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess\\textures\\Assets\\seabed-objects\\Sea_urchin2_shadow1.png");
+	TextureInfo texID10 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess\\textures\\Assets\\seabed-objects\\Starfish2_shadow1.png");
+	TextureInfo texID11 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess\\textures\\Assets\\seabed-objects\\Beige-violet_coral2_shadow2.png");
+	TextureInfo texID12 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess\\textures\\Assets\\seabed-objects\\Monster_fish_bones_shadow1.png");
+	TextureInfo texID13 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess\\textures\\Assets\\rocks-objects\\Rock5_3.png");
+	TextureInfo texID14 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess\\textures\\Assets\\seabed-objects\\Crab_shadow1.png");
+	TextureInfo texID15 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess\\textures\\Assets\\seabed-objects\\Brown-white_shell1_shadow1.png");
 
 	// Pirate stuff
-	TextureInfo texID16 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess-sprites\\Assets\\pirate-textures\\closed_trunk.png");
+	TextureInfo texID16 = loadTexture("C:\\Users\\eduar\\source\\repos\\m4\\graphic-proccess\\textures\\Assets\\pirate-textures\\closed_trunk.png");
 
 	// Cria��o de uma sprite
 	spr.setShader(&shader);

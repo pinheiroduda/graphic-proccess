@@ -1,7 +1,7 @@
-/* Hello Triangle - c�digo adaptado de https://learnopengl.com/#!Getting-started/Hello-Triangle
+/* Hello Triangle-c�digo adaptado de https://learnopengl.com/#!Getting-started/Hello-Triangle
  *
  * Adaptado por Rossana Baptista Queiroz
- * para a disciplina de Processamento Gr�fico - Unisinos
+ * para a disciplina de Processamento Gr�fico-Unisinos
  * Vers�o inicial: 7/4/2017
  * �ltima atualiza��o em 14/08/2023
  *
@@ -36,8 +36,7 @@ struct TextureInfo {
 };
 
 // Prot�tipos das fun��es
-//TextureInfo loadTexture(string texturePath);
-GLuint loadTexture(string texturePath);
+TextureInfo loadTexture(string texturePath);
 
 // Dimens�es da janela (pode ser alterado em tempo de execu��o)
 const GLuint WIDTH = 800, HEIGHT = 600;
@@ -45,8 +44,8 @@ const GLuint WIDTH = 800, HEIGHT = 600;
 // Variaveis globais
 Sprite spr;
 
-int animationsNumber = 5; // número de animações no frame
-int framesNumber = 5; // número de frames na animação
+int animationsNumber = 8; // número de animações no frame
+int framesNumber = 8; // número de frames na animação
 
 // Fun��o MAIN
 int main()
@@ -94,16 +93,16 @@ int main()
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_ALWAYS); // a cada ciclo
 
-	// Habilitar o modo de transpar�ncia (blend - mistura de cores)
+	// Habilitar o modo de transpar�ncia (blend-mistura de cores)
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	// Compilando e buildando o programa de shader
-	// Shader shader("../shaders/helloTriangle.vs", "../shaders/helloTriangle.fs");
 	Shader shader("C:\\Users\\eduar\\source\\repos\\graphic-proccess\\animated-sprites\\Src\\shaders\\tex.vs", "C:\\Users\\eduar\\source\\repos\\graphic-proccess\\animated-sprites\\Src\\shaders\\tex.fs");
 
-	GLuint texID1 = loadTexture("C:\\Users\\eduar\\source\\repos\\graphic-proccess\\animated-sprites\\Assets\\ocean-backgrounds\\1.png");
-	GLuint texID2 = loadTexture("C:\\Users\\eduar\\source\\repos\\graphic-proccess\\animated-sprites\\Assets\\Fisherman_walk.png");;
+	TextureInfo texID1 = loadTexture("C:\\Users\\eduar\\source\\repos\\graphic-proccess\\animated-sprites\\Assets\\ocean-backgrounds\\1.png");
+	// TextureInfo texID2 = loadTexture("C:\\Users\\eduar\\Downloads\\craftpix-net-605776-free-yokai-pixel-art-character-sprites\\Kitsune\\Walk.png");;
+	TextureInfo texID2 = loadTexture("C:\\Users\\eduar\\source\\repos\\graphic-proccess\\animated-sprites\\Assets\\Fisherman_walk.png");;
 
 
 	//// Cria��o de uma sprite
@@ -111,11 +110,11 @@ int main()
 
 	Sprite background;
 	background.setShader(&shader);
-	background.inicializar(texID1, 1, 1, glm::vec3(400.0, 300.0, 0.0), glm::vec3(1920.0 / 1.6, 1080.0 / 1.6, 1.0));
+	background.inicializar(texID1.texID, 1, 1, glm::vec3(400.0, 300.0, 0.0), glm::vec3(texID1.width * 1.4, texID1.height * 1.6, 1.0));
 
 	Sprite fisherman;
 	fisherman.setShader(&shader);
-	fisherman.inicializar(texID2, animationsNumber, framesNumber, glm::vec3(400.0, 300.0, 0.0), glm::vec3(1920.0 / 10.0, 1080.0 / 20.0, 1.0));
+	fisherman.inicializar(texID2.texID, animationsNumber, framesNumber, glm::vec3(400.0, 50.0, 0.0), glm::vec3(texID2.width, texID2.height, 1.0));
 
 
 	// Ativando o buffer de textura 0 da opengl
@@ -133,7 +132,7 @@ int main()
 
 	float lastFrameTime = 0.0f;
 
-	// Loop da aplica��o - "game loop"
+	// Loop da aplica��o-"game loop"
 	while (!glfwWindowShouldClose(window))
 	{
 		//spr.setTextureOffset(texOffset);
@@ -162,8 +161,8 @@ int main()
 	return 0;
 }
 
-// Fun��o de callback de teclado - s� pode ter uma inst�ncia (deve ser est�tica se
-// estiver dentro de uma classe) - � chamada sempre que uma tecla for pressionada
+// Fun��o de callback de teclado-s� pode ter uma inst�ncia (deve ser est�tica se
+// estiver dentro de uma classe)-� chamada sempre que uma tecla for pressionada
 // ou solta via GLFW
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
@@ -181,13 +180,13 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	}
 }
 
-GLuint loadTexture(string texturePath)
+TextureInfo loadTexture(string texturePath)
 {
-	GLuint texID;
+	TextureInfo texInfo;
 
 	// Gera o identificador da textura na mem�ria
-	glGenTextures(1, &texID);
-	glBindTexture(GL_TEXTURE_2D, texID);
+	glGenTextures(1, &texInfo.texID);
+	glBindTexture(GL_TEXTURE_2D, texInfo.texID);
 
 	// Configura��o do par�metro WRAPPING nas coords s e t
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -197,18 +196,18 @@ GLuint loadTexture(string texturePath)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	int width, height, nrChannels;
-	unsigned char* data = stbi_load(texturePath.c_str(), &width, &height, &nrChannels, 0);
+	int nrChannels;
+	unsigned char* data = stbi_load(texturePath.c_str(), &texInfo.width, &texInfo.height, &nrChannels, 0);
 
 	if (data)
 	{
 		if (nrChannels == 3) // jpg, bmp
 		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texInfo.width, texInfo.height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 		}
 		else // png
 		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texInfo.width, texInfo.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 		}
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
@@ -220,6 +219,6 @@ GLuint loadTexture(string texturePath)
 	stbi_image_free(data);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	return texID;
+	return texInfo;
 }
 

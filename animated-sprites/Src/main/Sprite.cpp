@@ -29,12 +29,12 @@ void Sprite::inicializar(GLuint texID, int nAnimations, int nFrames, glm::vec3 p
 	//Especificação da geometria da sprite (quadrado, 2 triangulos)
 	GLfloat vertices[] = {
 		//x   y    z    r      g      b      s    t
-		-0.5, 0.5, 0.0, cor.r, cor.g, cor.b, 0.0, offsetTex.t, //v0
-		-0.5,-0.5, 0.0, cor.r, cor.g, cor.b, 0.0, 0.0, //v1
-		 0.5, 0.5, 0.0, cor.r, cor.g, cor.b, offsetTex.s, offsetTex.t, //v2
-		-0.5,-0.5, 0.0, cor.r, cor.g, cor.b, 0.0, 0.0, //v1
-		 0.5,-0.5, 0.0, cor.r, cor.g, cor.b, offsetTex.s, 0.0, //v3
-		 0.5, 0.5, 0.0, cor.r, cor.g, cor.b, offsetTex.s, offsetTex.t  //v2
+		-0.5, 0.5, 0.0, 1.0, 0.0, 0.0, 0.0, offsetTex.t, //v0
+		-0.5,-0.5, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, //v1
+		 0.5, 0.5, 0.0, 1.0, 0.0, 0.0, offsetTex.s, offsetTex.t, //v2
+		-0.5,-0.5, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, //v1
+		 0.5,-0.5, 0.0, 1.0, 0.0, 0.0, offsetTex.s, 0.0, //v3
+		 0.5, 0.5, 0.0, 1.0, 0.0, 0.0, offsetTex.s, offsetTex.t  //v2
 	};
 
 	GLuint VBO;
@@ -109,35 +109,12 @@ void Sprite::atualizar()
 
 	float dt = now - pastTime;
 
-	if (dt >= 1 / FPS) {
+	if (dt >= frameDuration) {
 		int prevFrame = iFrame;
 		iFrame = (iFrame + 1) % nFrames;
 
-		// Alterna entre linhas do spritesheet (se houver, como na Flame)
-		if (prevFrame > iFrame) {
-			iAnimation = (iAnimation + 1) % nAnimations;
-		}
-
 		pastTime = now;
 	}
-
-	// Calcula deslocamentos nas coordenadas da textura
-	//float offsetTexFrameX = iFrame * offsetTex.s;
-	//float offsetTexFrameY = iAnimation * offsetTex.t;
-	//shader->setVec2("offsetTex", offsetTexFrameX, offsetTexFrameY);
-
-	//glm::mat4 model = glm::mat4(1);
-	//model = glm::translate(model, pos);
-
-	//if (this->angulo == 180.0f) {
-	//	model = glm::rotate(model, glm::radians(angulo), glm::vec3(0.0, 1.0, 0.0));
-	//}
-	//else {
-	//	model = glm::rotate(model, glm::radians(angulo), glm::vec3(0.0, 0.0, 1.0));
-	//}
-
-	//model = glm::scale(model, escala);
-	//shader->setMat4("model", glm::value_ptr(model));
 
 	float offsetTexFrameS = iFrame * offsetTex.s;
 	float offsetTexFrameT = iAnimation * offsetTex.t;

@@ -46,7 +46,7 @@ const GLuint WIDTH = 800, HEIGHT = 600;
 Sprite spr;
 
 int animationsNumber = 5; // número de animações no frame
-int framesNumber = 1; // número de frames na animação
+int framesNumber = 5; // número de frames na animação
 
 // Fun��o MAIN
 int main()

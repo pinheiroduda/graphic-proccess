@@ -19,11 +19,11 @@ void Sprite::inicializar(GLuint texID, int nAnimations, int nFrames, glm::vec3 p
 	this->iFrame = 0;
 	this->iAnimation = 0;
 	this->pastTime;
-	this->horizontalScale = 1.0 / (float)nFrames;
-	this->verticalScale = 1.0 / (float)nAnimations;
+	this->horizontalScale.x = 1.0 / (float)nFrames;
+	this->verticalScale.y = 1.0 / (float)nAnimations;
 	this->frameDuration = 1.0f / 12.0f; // 12 FPS
-	horizontalOffsetTex = 1.0 / (float)nFrames;
-	verticalOffsetTex = 1.0 / (float)nAnimations;
+	horizontalOffsetTex.x = 1.0 / (float)nFrames;
+	verticalOffsetTex.y = 1.0 / (float)nAnimations;
 
 	// Aqui setamos as coordenadas x, y e z do triângulo e as armazenamos de forma
 	// sequencial, já visando mandar para o VBO (Vertex Buffer Objects)
@@ -32,13 +32,13 @@ void Sprite::inicializar(GLuint texID, int nAnimations, int nFrames, glm::vec3 p
 	GLfloat vertices[] = {
 		//x     y    z    r    g    b    s    t
 		//Triangulo 0
-		-0.5, 0.5,  0.0, 1.0, 0.0, 0.0, 0.0, verticalOffsetTex,			// v0
+		-0.5, 0.5,  0.0, 1.0, 0.0, 0.0, 0.0, verticalOffsetTex.y,			// v0
 		-0.5, -0.5, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0,					// v1
-		0.5,  0.5,  0.0, 1.0, 0.0, 0.0, horizontalOffsetTex, verticalOffsetTex,   // v2
+		0.5,  0.5,  0.0, 1.0, 0.0, 0.0, horizontalOffsetTex.x, verticalOffsetTex.y,   // v2
 		 //Triangulo 1	
 		 -0.5, -0.5, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0,					// v1
-		0.5,  -0.5, 0.0, 1.0, 0.0, 0.0, horizontalOffsetTex, 0.0,			// v3
-		0.5,  0.5,  0.0, 1.0, 0.0, 0.0, horizontalOffsetTex, verticalOffsetTex	// v2
+		0.5,  -0.5, 0.0, 1.0, 0.0, 0.0, horizontalOffsetTex.x, 0.0,			// v3
+		0.5,  0.5,  0.0, 1.0, 0.0, 0.0, horizontalOffsetTex.x, verticalOffsetTex.y	// v2
 		
 	};
 
@@ -128,8 +128,8 @@ void Sprite::atualizar()
 	}
 
 	// Calcula deslocamentos nas coordenadas da textura
-	float offsetTexFrameS = iFrame * horizontalOffsetTex;
-	float offsetTexFrameT = iAnimation * verticalOffsetTex;
+	float offsetTexFrameS = iFrame * horizontalOffsetTex.x;
+	float offsetTexFrameT = iAnimation * verticalOffsetTex.y;
 	shader->setVec2("offsetTex", offsetTexFrameS, offsetTexFrameT);
 
 	glm::mat4 model = glm::mat4(1);

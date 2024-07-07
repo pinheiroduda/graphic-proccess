@@ -38,7 +38,7 @@ protected:
 	int nFrames, nAnimations;
 	int iFrame, iAnimation;
 	float frameDuration, pastTime;
-	float horizontalScale, verticalScale, horizontalOffsetTex, verticalOffsetTex;
+	glm::vec3 horizontalScale, verticalScale, horizontalOffsetTex, verticalOffsetTex;
 };
 
 

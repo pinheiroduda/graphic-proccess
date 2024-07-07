@@ -48,18 +48,6 @@ Sprite spr;
 int animationsNumber = 5; // número de animações no frame
 int framesNumber = 1; // número de frames na animação
 
-//struct SpriteInfo {
-//	GLuint textureID;
-//	glm::vec3 position;
-//	glm::vec3 size;
-//};
-//
-//static void startSprite(Sprite& sprite, Shader& shader, SpriteInfo& info)
-//{
-//	sprite.setShader(&shader);
-//	sprite.inicializar(info.textureID, info.position, info.size);
-//}
-
 // Fun��o MAIN
 int main()
 {
@@ -162,10 +150,6 @@ int main()
 		glClearColor(0.5f, 0.5f, 0.5f, 1.0f); // cor de fundo
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		//for (Sprite& sprite : sprites) {
-		//	sprite.desenhar();
-		//}
-
 		background.desenhar();
 		fisherman.desenhar();
 
@@ -186,16 +170,6 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
 
-	//if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
-	//{
-	//	isAnimating = true;
-	//	currentFrame = 0; // reiniciar a animação
-	//	animationTimer = 0.0f; // reiniciar o temporizador
-	//}
-	//if (key == GLFW_KEY_SPACE && action == GLFW_RELEASE)
-	//{
-	//	isAnimating = false;
-	//}
 
 	if (key == GLFW_KEY_D || key == GLFW_KEY_RIGHT)
 	{

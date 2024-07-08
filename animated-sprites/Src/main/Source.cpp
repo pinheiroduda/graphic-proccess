@@ -45,7 +45,7 @@ const GLuint WIDTH = 800, HEIGHT = 600;
 Sprite spr;
 
 int animationsNumber = 1; // número de animações no frame
-int framesNumber = 8; // número de frames na animação
+int framesNumber = 6; // número de frames na animação
 
 // Fun��o MAIN
 int main()
@@ -98,23 +98,18 @@ int main()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	// Compilando e buildando o programa de shader
-	Shader shader("C:\\Users\\eduar\\source\\repos\\graphic-proccess\\animated-sprites\\Src\\shaders\\tex.vs", "C:\\Users\\eduar\\source\\repos\\graphic-proccess\\animated-sprites\\Src\\shaders\\tex.fs");
+	Shader shader("C:\\Users\\eduar\\source\\repos\\graphic-proccess\\animated-sprites\\Src\\main\\tex.vs", "C:\\Users\\eduar\\source\\repos\\graphic-proccess\\animated-sprites\\Src\\main\\tex.fs");
 
 	TextureInfo texID1 = loadTexture("C:\\Users\\eduar\\source\\repos\\graphic-proccess\\animated-sprites\\Assets\\ocean-backgrounds\\1.png");
-	// TextureInfo texID2 = loadTexture("C:\\Users\\eduar\\Downloads\\craftpix-net-605776-free-yokai-pixel-art-character-sprites\\Kitsune\\Walk.png");;
 	TextureInfo texID2 = loadTexture("C:\\Users\\eduar\\source\\repos\\graphic-proccess\\animated-sprites\\Assets\\Fisherman_walk.png");;
-
-
-	//// Cria��o de uma sprite
-	spr.setShader(&shader);
 
 	Sprite background;
 	background.setShader(&shader);
-	background.inicializar(texID1.texID, 1, 1, glm::vec3(400.0, 300.0, 0.0), glm::vec3(texID1.width * 1.4, texID1.height * 1.6, 1.0));
+	background.inicializar(texID1.texID, 1, 1, glm::vec3(400.0, 300.0, 0.0), glm::vec3(texID1.width * 1.4, texID1.height * 1.6, 1.0), 0.0, glm::vec3(1.0, 0.0, 1.0));
 
 	Sprite fisherman;
 	fisherman.setShader(&shader);
-	fisherman.inicializar(texID2.texID, animationsNumber, framesNumber, glm::vec3(400.0, 80.0, 0.0), glm::vec3(texID2.width * 1.4, texID2.height * 1.5, 1.0));
+	fisherman.inicializar(texID2.texID, animationsNumber, framesNumber, glm::vec3(400.0, 80.0, 0.0), glm::vec3(texID2.width * 1.4, texID2.height * 1.5, 1.0), 0.0, glm::vec3(1.0, 0.0, 1.0));
 	std::cout << "Texture width" << texID2.width << std::endl;
 	std::cout << "Texture height" << texID2.height << std::endl;
 
@@ -131,8 +126,6 @@ int main()
 
 	// Matriz de transforma��o do objeto (matriz de modelo)
 	shader.setInt("texBuffer", 0);
-
-	float lastFrameTime = 0.0f;
 
 	// Loop da aplica��o-"game loop"
 	while (!glfwWindowShouldClose(window))

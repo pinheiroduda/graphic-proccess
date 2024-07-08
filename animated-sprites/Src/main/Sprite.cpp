@@ -12,13 +12,9 @@ void Sprite::inicializar(GLuint texID, int nAnimations, int nFrames, glm::vec3 p
 {
 	this->texID = texID;
 	this->pos = pos;
-	//this->escala = escala;
 	this->angulo = angulo;
 	this->nFrames = nFrames;
 	this->nAnimations = nAnimations;
-	//this->iFrame = 0;
-	//this->iAnimation = 0;
-	//this->pastTime;
 	this->escala.x = escala.x / (float)nFrames;
 	this->escala.y = escala.y / (float)nAnimations;
 
@@ -82,17 +78,6 @@ void Sprite::inicializar(GLuint texID, int nAnimations, int nFrames, glm::vec3 p
 
 }
 
-void Sprite::desenhar()
-{
-	atualizar();
-
-	glBindTexture(GL_TEXTURE_2D, texID);
-	glBindVertexArray(VAO); //Conectando ao buffer de geometria
-	glDrawArrays(GL_TRIANGLES, 0, 6);
-	glBindTexture(GL_TEXTURE_2D, 0); //unbind
-	glBindVertexArray(0); //unbind
-}
-
 
 void Sprite::moverParaDireita()
 {
@@ -112,8 +97,8 @@ void Sprite::atualizar()
 
 	float dt = now - pastTime;
 
-	if (dt >= frameDuration) {
-		int prevFrame = iFrame;
+	if (dt >= 1.0/FPS) {
+		//int prevFrame = iFrame;
 		iFrame = (iFrame + 1) % nFrames;
 
 		pastTime = now;
@@ -129,4 +114,15 @@ void Sprite::atualizar()
 	model = glm::scale(model, escala);
 	shader->setMat4("model", glm::value_ptr(model));
 
+}
+
+void Sprite::desenhar()
+{
+	atualizar();
+
+	glBindTexture(GL_TEXTURE_2D, texID);
+	glBindVertexArray(VAO); //Conectando ao buffer de geometria
+	glDrawArrays(GL_TRIANGLES, 0, 6);
+	glBindVertexArray(0); //unbind
+	glBindTexture(GL_TEXTURE_2D, 0); //unbind
 }

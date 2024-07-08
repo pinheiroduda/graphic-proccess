@@ -1,5 +1,6 @@
 #pragma once
 
+//GLM
 #include <glm/glm.hpp> 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -12,6 +13,7 @@ public:
 	Sprite() {}
 	~Sprite();
 	void inicializar(GLuint texID, int nAnimations = 1, int nFrames = 1, glm::vec3 pos = glm::vec3(0), glm::vec3 escala = glm::vec3(1), float angulo = 0.0, glm::vec3 cor = glm::vec3(1.0, 1.0, 0.0));
+	void atualizar();
 	void desenhar();
 	void finalizar();
 	void moverParaDireita();
@@ -22,7 +24,6 @@ public:
 	//inline void setPosition(const glm::vec3& newPos) { this->pos = newPos; }
 	inline void setAngulo(float angulo) { this->angulo = angulo; }
 protected:
-	void atualizar();
 	GLuint VAO; //identificador do buffer de geometria, indicando os atributos dos vértices
 	GLuint texID; //identificador do buffer de textura
 

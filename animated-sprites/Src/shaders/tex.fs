@@ -1,13 +1,13 @@
+//Código fonte do Fragment Shader (em GLSL)
 #version 400
 
 in vec3 vertexColor;
-in vec2 texcoord;
+in vec2 texCoord;
+out vec4 color;
 
 uniform sampler2D texBuffer;
 
-out vec4 color;
 void main()
 {
-	color = texture(texBuffer, texcoord);//vec4(vertexColor,1.0);
-
+	color = texture(texBuffer, texCoord);//vec4(vertexColor,1.0);
 }

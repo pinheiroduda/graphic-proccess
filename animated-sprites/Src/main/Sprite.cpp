@@ -83,6 +83,9 @@ void Sprite::inicializar(GLuint texID, int nAnimations, int nFrames, glm::vec3 p
 void Sprite::moverParaDireita()
 {
     pos.x += vel;
+	if (pos.x >= 810)
+		pos.x = 0;
+	std::cout << "position" << pos.x << std::endl;
 	if (escala.x < 0.0)
 		escala.x = -escala.x;
 
@@ -91,6 +94,8 @@ void Sprite::moverParaDireita()
 void Sprite::moverParaEsquerda()
 {
 	pos.x -= vel;
+	if (pos.x <= -10)
+		pos.x = 800;
 	if (escala.x > 0.0)
 		escala.x = -escala.x;
 }

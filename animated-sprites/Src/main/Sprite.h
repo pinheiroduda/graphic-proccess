@@ -20,9 +20,8 @@ public:
 	void moverParaEsquerda();
 
 	inline void setShader(Shader* shader) { this->shader = shader; }
-	//glm::vec3 getPosition() const { return pos; }
-	//inline void setPosition(const glm::vec3& newPos) { this->pos = newPos; }
 	inline void setAngulo(float angulo) { this->angulo = angulo; }
+
 protected:
 	GLuint VAO; //identificador do buffer de geometria, indicando os atributos dos vértices
 	GLuint texID; //identificador do buffer de textura
@@ -34,6 +33,8 @@ protected:
 	//Uma referência ao programa de shader que a sprite irá usar para seu desenho
 	Shader* shader;
 
+	bool onGround;
+	float vel;
 	float pastTime, FPS, frameDuration;
 
 	glm::vec2 offsetTex; // Deslocamento de textura para a animação de frames

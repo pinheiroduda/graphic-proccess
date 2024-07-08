@@ -43,6 +43,7 @@ const GLuint WIDTH = 800, HEIGHT = 600;
 
 // Variaveis globais
 Sprite spr;
+Sprite fisherman;
 
 int animationsNumber = 1; // número de animações no frame
 int framesNumber = 6; // número de frames na animação
@@ -107,11 +108,8 @@ int main()
 	background.setShader(&shader);
 	background.inicializar(texID1.texID, 1, 1, glm::vec3(400.0, 300.0, 0.0), glm::vec3(texID1.width * 1.4, texID1.height * 1.6, 1.0), 0.0, glm::vec3(1.0, 0.0, 1.0));
 
-	Sprite fisherman;
 	fisherman.setShader(&shader);
 	fisherman.inicializar(texID2.texID, animationsNumber, framesNumber, glm::vec3(400.0, 80.0, 0.0), glm::vec3(texID2.width * 1.4, texID2.height * 1.5, 1.0), 0.0, glm::vec3(1.0, 0.0, 1.0));
-	std::cout << "Texture width" << texID2.width << std::endl;
-	std::cout << "Texture height" << texID2.height << std::endl;
 
 
 	// Ativando o buffer de textura 0 da opengl
@@ -167,11 +165,11 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
 	if (key == GLFW_KEY_D || key == GLFW_KEY_RIGHT)
 	{
-		spr.moverParaDireita();
+		fisherman.moverParaDireita();
 	}
 	if (key == GLFW_KEY_A || key == GLFW_KEY_LEFT)
 	{
-		spr.moverParaEsquerda();
+		fisherman.moverParaEsquerda();
 	}
 }
 

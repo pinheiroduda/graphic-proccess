@@ -18,6 +18,7 @@ void Sprite::inicializar(GLuint texID, int nAnimations, int nFrames, glm::vec3 p
 	this->escala.x = escala.x / (float)nFrames;
 	this->escala.y = escala.y / (float)nAnimations;
 
+	vel = 5.0;
 	FPS = 12.0;
 	pastTime = 0.0;
 	frameDuration = 1.0f / FPS;
@@ -81,12 +82,15 @@ void Sprite::inicializar(GLuint texID, int nAnimations, int nFrames, glm::vec3 p
 
 void Sprite::moverParaDireita()
 {
+    pos.x += vel;
 	if (escala.x < 0.0)
 		escala.x = -escala.x;
+
 }
 
 void Sprite::moverParaEsquerda()
 {
+	pos.x -= vel;
 	if (escala.x > 0.0)
 		escala.x = -escala.x;
 }
@@ -97,8 +101,8 @@ void Sprite::atualizar()
 
 	float dt = now - pastTime;
 
-	if (dt >= 1.0/FPS) {
-		//int prevFrame = iFrame;
+	if (dt >= frameDuration) {
+		int prevFrame = iFrame;
 		iFrame = (iFrame + 1) % nFrames;
 
 		pastTime = now;

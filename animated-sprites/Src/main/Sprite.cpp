@@ -8,20 +8,23 @@ Sprite::~Sprite()
 	glDeleteVertexArrays(1, &VAO);
 }
 
-void Sprite::inicializar(GLuint texID, int nAnimations, int nFrames, glm::vec3 pos, glm::vec3 escala, float angulo)
+void Sprite::inicializar(GLuint texID, int nAnimations, int nFrames, glm::vec3 pos, glm::vec3 escala, float angulo, glm::vec3 cor)
 {
 	this->texID = texID;
 	this->pos = pos;
-	this->escala = escala;
+	//this->escala = escala;
 	this->angulo = angulo;
 	this->nFrames = nFrames;
 	this->nAnimations = nAnimations;
-	this->iFrame = 0;
-	this->iAnimation = 0;
-	this->pastTime;
+	//this->iFrame = 0;
+	//this->iAnimation = 0;
+	//this->pastTime;
 	this->escala.x = escala.x / (float)nFrames;
 	this->escala.y = escala.y / (float)nAnimations;
-	this->frameDuration = 1.0f / 12.0f; // 12 FPS
+
+	FPS = 12.0;
+	pastTime = 0.0;
+	frameDuration = 1.0f / FPS;
 
 	offsetTex.s = 1.0 / (float)nFrames;
 	offsetTex.t = 1.0 / (float)nAnimations;
@@ -29,12 +32,12 @@ void Sprite::inicializar(GLuint texID, int nAnimations, int nFrames, glm::vec3 p
 	//Especificação da geometria da sprite (quadrado, 2 triangulos)
 	GLfloat vertices[] = {
 		//x   y    z    r      g      b      s    t
-		-0.5, 0.5, 0.0, 1.0, 0.0, 0.0, 0.0, offsetTex.t, //v0
-		-0.5,-0.5, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, //v1
-		 0.5, 0.5, 0.0, 1.0, 0.0, 0.0, offsetTex.s, offsetTex.t, //v2
-		-0.5,-0.5, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, //v1
-		 0.5,-0.5, 0.0, 1.0, 0.0, 0.0, offsetTex.s, 0.0, //v3
-		 0.5, 0.5, 0.0, 1.0, 0.0, 0.0, offsetTex.s, offsetTex.t  //v2
+		-0.5, 0.5, 0.0, cor.r, cor.g, cor.b, 0.0, offsetTex.t, //v0
+		-0.5,-0.5, 0.0, cor.r, cor.g, cor.b, 0.0, 0.0, //v1
+		 0.5, 0.5, 0.0, cor.r, cor.g, cor.b, offsetTex.s, offsetTex.t, //v2
+		-0.5,-0.5, 0.0, cor.r, cor.g, cor.b, 0.0, 0.0, //v1
+		 0.5,-0.5, 0.0, cor.r, cor.g, cor.b, offsetTex.s, 0.0, //v3
+		 0.5, 0.5, 0.0, cor.r, cor.g, cor.b, offsetTex.s, offsetTex.t  //v2
 	};
 
 	GLuint VBO;

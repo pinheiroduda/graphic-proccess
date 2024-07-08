@@ -44,7 +44,7 @@ const GLuint WIDTH = 800, HEIGHT = 600;
 // Variaveis globais
 Sprite spr;
 
-int animationsNumber = 8; // número de animações no frame
+int animationsNumber = 1; // número de animações no frame
 int framesNumber = 8; // número de frames na animação
 
 // Fun��o MAIN
@@ -114,7 +114,9 @@ int main()
 
 	Sprite fisherman;
 	fisherman.setShader(&shader);
-	fisherman.inicializar(texID2.texID, animationsNumber, framesNumber, glm::vec3(400.0, 50.0, 0.0), glm::vec3(texID2.width, texID2.height, 1.0));
+	fisherman.inicializar(texID2.texID, animationsNumber, framesNumber, glm::vec3(400.0, 80.0, 0.0), glm::vec3(texID2.width * 1.4, texID2.height * 1.5, 1.0));
+	std::cout << "Texture width" << texID2.width << std::endl;
+	std::cout << "Texture height" << texID2.height << std::endl;
 
 
 	// Ativando o buffer de textura 0 da opengl

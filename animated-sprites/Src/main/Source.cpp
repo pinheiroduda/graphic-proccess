@@ -190,6 +190,14 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	{
 		fisherman.moverParaEsquerda();
 	}
+	if (key == GLFW_KEY_W || key == GLFW_KEY_UP)
+	{
+		fisherman.moverParaCima();
+	}
+	if (key == GLFW_KEY_S || key == GLFW_KEY_DOWN)
+	{
+		fisherman.moverParaBaixo();
+	}
 }
 
 TextureInfo loadTexture(string texturePath)

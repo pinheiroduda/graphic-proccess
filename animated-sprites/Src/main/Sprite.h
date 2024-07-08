@@ -18,6 +18,8 @@ public:
 	void finalizar();
 	void moverParaDireita();
 	void moverParaEsquerda();
+	void moverParaCima();
+	void moverParaBaixo();
 
 	inline void setShader(Shader* shader) { this->shader = shader; }
 	inline void setAngulo(float angulo) { this->angulo = angulo; }

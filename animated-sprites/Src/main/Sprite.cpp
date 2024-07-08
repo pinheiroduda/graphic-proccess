@@ -100,6 +100,22 @@ void Sprite::moverParaEsquerda()
 		escala.x = -escala.x;
 }
 
+void Sprite::moverParaCima()
+{
+	pos.y += vel;
+	if (pos.y >= 100)
+		pos.y = 100;
+	std::cout << "position" << pos.x << std::endl;
+}
+
+void Sprite::moverParaBaixo()
+{
+	pos.y -= vel;
+	if (pos.y <= 78)
+		pos.y = 78;
+}
+
+
 void Sprite::atualizar()
 {
 	float now = (float) glfwGetTime();

@@ -102,14 +102,30 @@ int main()
 	Shader shader("C:\\Users\\eduar\\source\\repos\\graphic-proccess\\animated-sprites\\Src\\main\\tex.vs", "C:\\Users\\eduar\\source\\repos\\graphic-proccess\\animated-sprites\\Src\\main\\tex.fs");
 
 	TextureInfo texID1 = loadTexture("C:\\Users\\eduar\\source\\repos\\graphic-proccess\\animated-sprites\\Assets\\ocean-backgrounds\\1.png");
-	TextureInfo texID2 = loadTexture("C:\\Users\\eduar\\source\\repos\\graphic-proccess\\animated-sprites\\Assets\\Fisherman_walk.png");;
+	TextureInfo texID2 = loadTexture("C:\\Users\\eduar\\source\\repos\\graphic-proccess\\animated-sprites\\Assets\\ocean-backgrounds\\2.png");
+	TextureInfo texID3 = loadTexture("C:\\Users\\eduar\\source\\repos\\graphic-proccess\\animated-sprites\\Assets\\ocean-backgrounds\\3.png");
+	TextureInfo texID4 = loadTexture("C:\\Users\\eduar\\source\\repos\\graphic-proccess\\animated-sprites\\Assets\\ocean-backgrounds\\4.png");
+	TextureInfo texID5 = loadTexture("C:\\Users\\eduar\\source\\repos\\graphic-proccess\\animated-sprites\\Assets\\Fisherman_walk.png");
 
 	Sprite background;
 	background.setShader(&shader);
 	background.inicializar(texID1.texID, 1, 1, glm::vec3(400.0, 300.0, 0.0), glm::vec3(texID1.width * 1.4, texID1.height * 1.6, 1.0), 0.0, glm::vec3(1.0, 0.0, 1.0));
 
+	Sprite bigCloudBg;
+	bigCloudBg.setShader(&shader);
+	bigCloudBg.inicializar(texID2.texID, 1, 1, glm::vec3(400.0, 300.0, 0.0), glm::vec3(texID2.width * 1.4, texID2.height * 1.4, 1.0));
+
+	Sprite blueCloudBg;
+	blueCloudBg.setShader(&shader);
+	blueCloudBg.inicializar(texID3.texID, 1, 1, glm::vec3(400.0, 300.0, 0.0), glm::vec3(texID3.width * 1.4, texID3.height * 1.4, 1.0));
+
+	Sprite smallCloudBg;
+	smallCloudBg.setShader(&shader);
+	smallCloudBg.inicializar(texID4.texID, 1, 1, glm::vec3(400.0, 300.0, 0.0), glm::vec3(texID4.width * 1.4, texID4.height * 1.4, 1.0));
+
+
 	fisherman.setShader(&shader);
-	fisherman.inicializar(texID2.texID, animationsNumber, framesNumber, glm::vec3(400.0, 80.0, 0.0), glm::vec3(texID2.width * 1.4, texID2.height * 1.5, 1.0), 0.0, glm::vec3(1.0, 0.0, 1.0));
+	fisherman.inicializar(texID5.texID, animationsNumber, framesNumber, glm::vec3(400.0, 80.0, 0.0), glm::vec3(texID5.width * 1.4, texID5.height * 1.5, 1.0), 0.0, glm::vec3(1.0, 0.0, 1.0));
 
 
 	// Ativando o buffer de textura 0 da opengl
@@ -143,6 +159,9 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		background.desenhar();
+		bigCloudBg.desenhar();
+		blueCloudBg.desenhar();
+		smallCloudBg.desenhar();
 		fisherman.desenhar();
 
 		// Troca os buffers da tela
